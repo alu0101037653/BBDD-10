@@ -1,0 +1,450 @@
+alu0101037653@cc2326:~$ ssh -p 2200 alu0101037653@exthost2.etsii.ull.es
+alu0101037653@exthost2.etsii.ull.es's password: 
+Welcome to Ubuntu 16.04.3 LTS (GNU/Linux 4.4.0-134-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+Last login: Wed Jan  2 16:38:37 2019 from 10.20.50.135
+ alu0101037653@4c688d36742f:~$  sqlplus
+
+alu0101037653@4c688d36742f:~$ SQLPLUS
+-bash: SQLPLUS: command not found
+alu0101037653@4c688d36742f:~$ sqlplus
+
+alu0101037653@4c688d36742f:~$ exit
+logout
+Connection to exthost2.etsii.ull.es closed.
+alu0101037653@cc2326:~$ ssh alu0101037653@exthost2.etsii.ull.es
+The authenticity of host 'exthost2.etsii.ull.es (10.209.32.241)' can't be established.
+ECDSA key fingerprint is SHA256:d+0guc1W3UeQ7s/2YKyjqeGYNkfdyjTJENoDT4GQ2lY.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'exthost2.etsii.ull.es,10.209.32.241' (ECDSA) to the list of known hosts.
+alu0101037653@exthost2.etsii.ull.es's password: 
+Welcome to Ubuntu 16.04.1 LTS (GNU/Linux 4.4.0-134-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+Pueden actualizarse 377 paquetes.
+1 actualización es de seguridad.
+
+New release '18.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+*** Es necesario reiniciar el sistema ***
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+Last login: Wed Dec 19 13:08:07 2018 from 10.209.32.82
+alu0101037653@c2:~$ sqlplus
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Jan 9 13:12:31 2019
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Enter password: 
+Last Successful login time: Wed Jan 02 2019 20:31:19 +00:00
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SQL> SET SERVEROUTPUT ON
+SQL> SPOOL PRACT10
+SQL> DECLARE
+  2  I NUMBER := 1;
+  3  I2 NUMBER;
+  4  BEGIN
+  5  WHILE I<=10 LOOP
+  6  I3:=I**3;
+  7  DBMS_OUTPUT.PUT_LINE('I: ' || I || ' CUBO: ' || I3);
+  8  I := I+1;
+  9  END LOOP;
+ 10  END;
+ 11  /
+I3:=I**3;
+*
+ERROR at line 6:
+ORA-06550: line 6, column 1:
+PLS-00201: identifier 'I3' must be declared
+ORA-06550: line 6, column 1:
+PL/SQL: Statement ignored
+ORA-06550: line 7, column 49:
+PLS-00201: identifier 'I3' must be declared
+ORA-06550: line 7, column 1:
+PL/SQL: Statement ignored
+
+
+SQL> DECLARE
+  2  I NUMBER := 1;
+  3  I3 NUMBER;
+  4  BEGIN
+  5  WHILE I<=10 LOOP
+  6  I3:=I**3;
+  7  DBMS_OUTPUT.PUT_LINE('I: ' || I || ' CUBO: ' || I3);
+  8  I := I+1;
+  9  END LOOP;
+ 10  END;
+ 11  /
+I: 1 CUBO: 1
+I: 2 CUBO: 8
+I: 3 CUBO: 27
+I: 4 CUBO: 64
+I: 5 CUBO: 125
+I: 6 CUBO: 216
+I: 7 CUBO: 343
+I: 8 CUBO: 512
+I: 9 CUBO: 729
+I: 10 CUBO: 1000
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2  I3 NUMBER;
+  3  BEGIN
+  4  FOR I IN 1..10 LOOP
+  5  I3=I**3;
+  6  DBMS_OUTPUT.PUT_LINE('I: ' || I || ' CUBO: ' || I3);
+  7  END LOOP;
+  8  END;
+  9  /
+I3=I**3;
+  *
+ERROR at line 5:
+ORA-06550: line 5, column 3:
+PLS-00103: Encountered the symbol "=" when expecting one of the following:
+:= . ( @ % ;
+The symbol ":= was inserted before "=" to continue.
+
+
+SQL> DECLARE
+  2  I3 NUMBER;
+  3  BEGIN
+  4  FOR I IN 1..10 LOOP
+  5  I3:=I**3;
+  6  DBMS_OUTPUT.PUT_LINE('I: ' || I || ' CUBO: ' || I3);
+  7  END LOOP;
+  8  END;
+  9  /
+I: 1 CUBO: 1
+I: 2 CUBO: 8
+I: 3 CUBO: 27
+I: 4 CUBO: 64
+I: 5 CUBO: 125
+I: 6 CUBO: 216
+I: 7 CUBO: 343
+I: 8 CUBO: 512
+I: 9 CUBO: 729
+I: 10 CUBO: 1000
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2  I3 NUMBER;
+  3  BEGIN
+  4  FOR I IN REVERSE 1..10 LOOP
+  5  I3:=I**3;
+  6  DBMS_OUTPUT.PUT_LINE('I: ' || I || ' CUBO: ' || I3);
+  7  END LOOP;
+  8  END;
+  9  /
+I: 10 CUBO: 1000
+I: 9 CUBO: 729
+I: 8 CUBO: 512
+I: 7 CUBO: 343
+I: 6 CUBO: 216
+I: 5 CUBO: 125
+I: 4 CUBO: 64
+I: 3 CUBO: 27
+I: 2 CUBO: 8
+I: 1 CUBO: 1
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2  I3 NUMBER;
+  3  BEGIN
+  4  FOR I IN 1..10 LOOP
+  5  IF MOD(I,2)=0 THEN
+  6  I3:=I**3;
+  7  DBMS_OUTPUT.PUT_LINE('I: ' || I || ' CUBO: ' || I3);
+  8  END IF;
+  9  END LOOP;
+ 10  END;
+ 11  /
+I: 2 CUBO: 8
+I: 4 CUBO: 64
+I: 6 CUBO: 216
+I: 8 CUBO: 512
+I: 10 CUBO: 1000
+
+PL/SQL procedure successfully completed.
+
+SQL> BEGIN
+  2  FOR I IN 1..10 LOOP
+  3  IF MOD(I,2)=0 THEN
+  4  DBMS_OUTPUT.PUT_LINE('I: ' || I || ' CUBO: ' || I**3);
+  5  END IF;
+  6  END LOOP;
+  7  END;
+  8  /
+I: 2 CUBO: 8
+I: 4 CUBO: 64
+I: 6 CUBO: 216
+I: 8 CUBO: 512
+I: 10 CUBO: 1000
+
+PL/SQL procedure successfully completed.
+
+SQL> DECALRE
+SP2-0042: unknown command "DECALRE" - rest of line ignored.
+SQL> DECLARE
+  2  CURSOR C_PROF IS
+  3  SELECT *
+  4  FROM PROFESOR;
+  5  v_prof PROFESOR%ROWTYPE;
+  6  BEGIN
+  7  OPEN C_PROF;
+  8  LOOP
+  9  FETCH C_PROF INTO v_prof;
+ 10  EXIT WHEN C_PROF%NOTFOUND;
+ 11  DBMS_OUTPUT.PUT_LINE('DNI: ' || v_prof.DNI || 'Nombre: ' || v_prof.P);
+ 12  END LOOP;
+ 13  CLOSE C_PROF;
+ 14  END;
+ 15  /
+DNI: 9090Nombre: LUIS
+DNI: 1111Nombre: JUAN
+DNI: 2222Nombre: CARLOS
+DNI: 3333Nombre: PEDRO
+DNI: 4444Nombre: MARIA
+DNI: 5555Nombre: IVAN
+DNI: 6666Nombre: CARMEN
+DNI: 7777Nombre: MARIO
+DNI: 8888Nombre: FRANCISCO
+DNI: 9999Nombre: ANGELA
+DNI: 1010Nombre: DAVID
+DNI: 2020Nombre: SOLEDAD
+DNI: 3030Nombre: JOSE MANUEL
+DNI: 4040Nombre: CARMERLO
+DNI: 5050Nombre: CARINA
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2  CURSOR C_PROF IS
+  3  SELECT *
+  4  FROM PROFESOR;
+  5  BEGIN
+  6  FOR v_prof IN C_PROF LOOP
+  7  DBMS_OUTPUT.PUT_LINE('DNI: ' || v_prof.DNI || 'Nombre: ' || v_prof.P);
+  8  END LOOP;
+  9  END;/
+ 10  /
+END;/
+    *
+ERROR at line 9:
+ORA-06550: line 9, column 5:
+PLS-00103: Encountered the symbol "/" The symbol "/" was ignored.
+
+
+SQL> DECLARE
+  2  CURSOR C_PROF IS
+  3  SELECT *
+  4  FROM PROFESOR;
+  5  BEGIN
+  6  FOR v_prof IN C_PROF LOOP
+  7  DBMS_OUTPUT.PUT_LINE('DNI: ' || v_prof.DNI || 'Nombre: ' || v_prof.P);
+  8  END LOOP;
+  9  END;
+ 10  /
+DNI: 9090Nombre: LUIS
+DNI: 1111Nombre: JUAN
+DNI: 2222Nombre: CARLOS
+DNI: 3333Nombre: PEDRO
+DNI: 4444Nombre: MARIA
+DNI: 5555Nombre: IVAN
+DNI: 6666Nombre: CARMEN
+DNI: 7777Nombre: MARIO
+DNI: 8888Nombre: FRANCISCO
+DNI: 9999Nombre: ANGELA
+DNI: 1010Nombre: DAVID
+DNI: 2020Nombre: SOLEDAD
+DNI: 3030Nombre: JOSE MANUEL
+DNI: 4040Nombre: CARMERLO
+DNI: 5050Nombre: CARINA
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2  CURSOR C_DEPART IS
+  3  ;
+  4  /
+;
+*
+ERROR at line 3:
+ORA-06550: line 3, column 1:
+PLS-00103: Encountered the symbol ";" when expecting one of the following:
+( select <a SQL statement>
+
+
+SQL> CREATE PROCEDURE AREAS_DEP(v_cd AREAS.CD%TYPE)
+  2  IS
+  3  DECLARE
+  4  CURSOR v_depart IS
+  5  /
+
+Warning: Procedure created with compilation errors.
+
+SQL> DROP PROCEDURE AREAS_DEP;
+
+Procedure dropped.
+
+SQL> CREATE PROCEDURE AREAS_DEP(v_cd AREAS.CD%TYPE)
+  2  IS
+  3  CURSOR v_depart IS
+  4  SELECT AR
+  5  FROM AREA
+  6  WHERE CD=v_cd;
+  7  BEGIN
+  8  FOR narea IN v_depart LOOP
+  9  DBMS_OUTPUT.PUT_LINE(narea.AR);
+ 10  END LOOP;
+ 11  END;
+ 12  /
+
+Warning: Procedure created with compilation errors.
+
+SQL> DROP PROCEDURE AREAS_DEP;
+
+Procedure dropped.
+
+SQL> CREATE PROCEDURE AREAS_DEP(v_cd AREAS.CD%TYPE)
+  2  IS
+  3  CURSOR v_depart IS
+  4  SELECT AR
+  5  FROM AREA
+  6  WHERE CD=v_cd;
+  7  BEGIN
+  8  FOR narea IN v_depart LOOP
+  9  DBMS_OUTPUT.PUT_LINE(narea.ar);
+ 10  END LOOP;
+ 11  END;
+ 12  /
+
+Warning: Procedure created with compilation errors.
+
+SQL> DROP PROCEDURE AREAS_DEP;
+
+Procedure dropped.
+
+SQL> CREATE PROCEDURE AREAS_DEP(v_cd AREAS.CD%TYPE) IS
+  2  CURSOR cursor(v) IS
+  3  SELECT AR
+  4  FROM AREA
+  5  WHERE CD=v;
+  6  BEGIN
+  7  FOR narea IN cursor(v_cd) LOOP
+  8  DBMS_OUTPUT.PUT_LINE(narea.AR);
+  9  END LOOP;
+ 10  END;
+ 11  /
+
+Warning: Procedure created with compilation errors.
+
+SQL> SHOW ERRORS
+Errors for PROCEDURE AREAS_DEP:
+
+LINE/COL ERROR
+-------- -----------------------------------------------------------------
+2/16	 PLS-00103: Encountered the symbol ")" when expecting one of the
+	 following:
+	 in out <an identifier> <a double-quoted delimited-identifier>
+	 table ... columns long double ref char time timestamp
+	 interval date binary national character nchar
+	 The symbol "<an identifier>" was substituted for ")" to continue.
+
+
+SQL> DROP PROCEDURE AREAS_DEP;
+
+Procedure dropped.
+
+SQL> CREATE PROCEDURE AREAS_DEP(v_cd AREAS.CD%TYPE) IS
+  2  CURSOR cursor(v AREAS.CD%TYPE) IS
+  3  SELECT AR
+  4  FROM AREA
+  5  WHERE CD=v;
+  6  BEGIN
+  7  FOR narea IN cursor(v_cd) LOOP
+  8  DBMS_OUTPUT.PUT_LINE(narea.AR);
+  9  END LOOP;
+ 10  END;
+ 11  /
+
+Warning: Procedure created with compilation errors.
+
+SQL> SHOW ERRORS
+Errors for PROCEDURE AREAS_DEP:
+
+LINE/COL ERROR
+-------- -----------------------------------------------------------------
+0/0	 PL/SQL: Compilation unit analysis terminated
+1/26	 PLS-00201: identifier 'AREAS.CD' must be declared
+SQL> DROP PROCEDURE AREAS_DEP;
+
+Procedure dropped.
+
+SQL> CREATE PROCEDURE AREAS_DEP(v_cd AREAS.CD%TYPE) IS
+  2  CURSOR cursor(v AREAS.CD%TYPE) IS
+  3  ;
+
+SQL> CREATE PROCEDURE AREAS_DEP(v_cd AREA.CD%TYPE) IS
+  2  CURSOR cursor(v AREAS.CD%TYPE) IS
+  3  ;
+  4  /
+
+Warning: Procedure created with compilation errors.
+
+SQL> DROP PROCEDURE AREAS_DEP;
+
+Procedure dropped.
+
+SQL> CREATE PROCEDURE AREAS_DEP(v_cd AREA.CD%TYPE) IS
+  2  CURSOR cursor(v AREA.CD%TYPE) IS
+  3  SELECT AR
+  4  FROM AREA
+  5  WHERE CD=v;
+  6  begin
+  7  FOR narea IN cursor(v_cd) LOOP
+  8  DBMS_OUTPUT.PUT_LINE(narea.AR);
+  9  END LOOP;
+ 10  END;
+ 11  /
+
+Procedure created.
+
+SQL> AREAS_DEP(1);
+SP2-0734: unknown command beginning "AREAS_DEP(..." - rest of line ignored.
+SQL> CALL AREAS_DEP(1);
+ANALISIS MATEMATICO
+DIDACTICA DE LA MATEMATICA
+MATEMATICA APLICADA
+
+Call completed.
+
+SQL> SPOOL OFF
+SQL> 
