@@ -437,8 +437,6 @@ SQL> CREATE PROCEDURE AREAS_DEP(v_cd AREA.CD%TYPE) IS
 
 Procedure created.
 
-SQL> AREAS_DEP(1);
-SP2-0734: unknown command beginning "AREAS_DEP(..." - rest of line ignored.
 SQL> CALL AREAS_DEP(1);
 ANALISIS MATEMATICO
 DIDACTICA DE LA MATEMATICA
